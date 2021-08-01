@@ -1,0 +1,92 @@
+<div class="container mt-5">
+    <div>
+        <button type="button" [routerLink]="''" class="btn btn-secondary">Search Another City</button>
+    </div>
+    <div class="mt-5 spinner" *ngIf="!dataFetched">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div class="mt-5" *ngIf="dataFetched">
+      <div class="headings">
+        <span class="float-end">
+          <label for="degreeSelect" class="form-label fs-6"
+            >Select unit for Temperature</label
+          >
+          <select
+            id="degreeSelect"
+            [(ngModel)]="selectedDegree"
+            (ngModelChange)="degreeChange()"
+            class="form-control form-select"
+            aria-label="Default select example"
+          >
+            <option value="Celsius">&#176;C (Celsius)</option>
+            <option value="Fahrenheit">&#176;F (Fahrenheit)</option>
+            <option value="Kelvin">&#176;K (Kelvin)</option>
+          </select>
+        </span>
+        <span>
+          <strong> Location: </strong>
+          {{ selectedCity }}<br />
+          <strong> Timezone: </strong>
+          {{ dailyForecasts.timezone }}
+        </span>
+      </div>
+      <div class="mt-5 weather-container">
+        <div class="row data-row">
+          <div class="col"></div>
+          <div class="col" *ngFor="let forecast of forecasts">
+            <strong>
+              {{ forecast.dt * 1000 | date }}
+            </strong>
+          </div>
+        </div>
+        <div
+          *ngFor="let field of fields"
+          class="row data-row"
+          [ngStyle]="{
+            'background-color': 'rgba(131, 168, 214,' + field.opacity + ')'
+          }"
+        >
+          <div class="col">
+            <strong>
+              {{ field.label }}
+            </strong>
+          </div>
+          <div class="col" *ngFor="let forecast of forecasts">
+            <div [ngSwitch]="field.key">
+              <div *ngSwitchCase="'morn'">
+                {{ forecast.temp.morn }} &#176;{{ selectedDegree[0] }}
+              </div>
+              <div *ngSwitchCase="'day'">
+                {{ forecast.temp.day }} &#176;{{ selectedDegree[0] }}
+              </div>
+              <div *ngSwitchCase="'night'">
+                {{ forecast.temp.night }} &#176;{{ selectedDegree[0] }}
+              </div>
+              <div *ngSwitchCase="'min'">
+                {{ forecast.temp.min }} &#176;{{ selectedDegree[0] }}
+              </div>
+              <div *ngSwitchCase="'max'">
+                {{ forecast.temp.max }} &#176;{{ selectedDegree[0] }}
+              </div>
+              <div *ngSwitchCase="'humidity'">{{ forecast.humidity }}%</div>
+              <div *ngSwitchCase="'mean'">
+                <div *ngIf="forecast.mean">
+                  {{ forecast.mean }} &#176;{{ selectedDegree[0] }}
+                </div>
+                <div *ngIf="!forecast.mean">N/A</div>
+              </div>
+              <div *ngSwitchCase="'mode'">
+                <div *ngIf="forecast.mode">
+                  {{ forecast.mode }} &#176;{{ selectedDegree[0] }}
+                </div>
+                <div *ngIf="!forecast.mode">N/A</div>
+              </div>
+              <div *ngSwitchDefault>N/A</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

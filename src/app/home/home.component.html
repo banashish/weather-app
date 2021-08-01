@@ -1,0 +1,22 @@
+<div class="home-body">
+  <div class="input-section">
+    <h3>Check out weather in your city</h3>
+    <div class="input-box">
+      <input
+      [(ngModel)]="cityInput"
+        (ngModelChange)="cityChange()"
+        class="form-control form-control-lg"
+        list="datalistOptions"
+        id="exampleDataList"
+        placeholder="Please enter your city name"
+      />
+      <div *ngIf="showValidCityError" class=" text-start text-danger mt-2"><strong>Please enter a valid city.</strong></div>
+      <datalist id="datalistOptions">
+        <option *ngFor="let location of helpList" data-value="location.index">{{location.name}}</option>
+      </datalist>
+      <div class="d-grid gap-2 col-6 mx-auto mt-5">
+        <button class="btn btn-secondary" (click)="onSearch()" type="button" [disabled]="!cityInput">Search</button>
+      </div>
+    </div>
+  </div>
+</div>

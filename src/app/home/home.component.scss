@@ -1,0 +1,26 @@
+.home-body {
+    background-image: url(https://picsum.photos/seed/picsum/1000/720);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: lighten;
+    min-height: 100vh;
+    // min-width: 100vh;
+    .input-section {
+        height: 300px;
+        width: 800px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -150px;
+        margin-left: -400px;
+        border: 3px solid lightcoral;
+        padding: 40px 30px;
+        border-radius: 3%;
+        text-align: center;
+        background-color: rgba($color: #9cad32, $alpha: 0.2);
+    }
+    .input-box {
+        margin-top: 40px;
+    }
+}

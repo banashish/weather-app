@@ -1,0 +1,23 @@
+.headings {
+    font-size:x-large;
+}
+.container {
+    margin-top: 80px !important;
+}
+.weather-container {
+    border: 2px solid black;
+    padding: 0px 12px;
+    text-align: center;
+    .data-row {
+        padding: 20px;
+        border-bottom: 1px solid black;
+    }
+    .row:last-child {
+        border: none;
+    }
+}
+.spinner {
+    position: fixed;
+    left: 50%;
+    margin-left: 4px;
+}
